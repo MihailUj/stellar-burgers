@@ -60,7 +60,6 @@ export const constructorSlice = createSlice({
         } else {
           state.constructorItems.ingredients.push(action.payload);
         }
-        console.log(state.constructorItems.ingredients);
       }
     },
 

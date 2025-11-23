@@ -34,7 +34,12 @@ export const registerUser = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk('/user/getUser', getUserApi);
-export const logout = createAsyncThunk('/user/logout', logoutApi);
+export const logout = createAsyncThunk('/user/logout', () =>
+  logoutApi().then(() => {
+    deleteCookie('accessToken');
+    localStorage.removeItem('refreshToken');
+  })
+);
 export const updateUser = createAsyncThunk('/user/updateUser', updateUserApi);
 export const getUserOrders = createAsyncThunk('/user/orders', getOrdersApi);
 
@@ -132,9 +137,6 @@ export const userDataSlice = createSlice({
       state.user = initialState.user;
       state.isLoading = false;
       state.error = null;
-      deleteCookie('accessToken');
-      localStorage.removeItem('refreshToken');
-      console.log(state);
     });
 
     builder.addCase(updateUser.pending, (state) => {

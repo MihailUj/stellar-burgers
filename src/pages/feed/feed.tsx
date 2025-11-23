@@ -19,7 +19,7 @@ export const Feed: FC = () => {
   }, []);
 
   const getFeeds = () => {
-    getFeedsThunk();
+    dispatch(getFeedsThunk());
   };
 
   if (ordersData.isLoading && ingredients.isLoading) {

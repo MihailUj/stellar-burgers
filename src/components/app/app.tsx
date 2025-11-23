@@ -13,7 +13,13 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams
+} from 'react-router-dom';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { useEffect } from 'react';
 import { getIngredientsThunk } from '../../services/slices/ingredientsSlice';
@@ -26,7 +32,6 @@ const App = () => {
   const navigate = useNavigate();
 
   const background = location.state?.background;
-  console.log(location);
 
   useEffect(() => {
     dispatch(getIngredientsThunk());
@@ -97,7 +102,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Информация о заказе' onClose={closeModal}>
+              <Modal title={'Информация о заказе'} onClose={closeModal}>
                 <OrderInfo />
               </Modal>
             }
@@ -113,7 +118,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Информация о заказе' onClose={closeModal}>
+              <Modal title={'Информация о заказе'} onClose={closeModal}>
                 <OrderInfo />
               </Modal>
             }

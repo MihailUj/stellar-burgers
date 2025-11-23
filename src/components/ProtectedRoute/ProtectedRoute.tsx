@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import store, { RootState } from '../../services/store';
+import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
+import { getUserState } from '../../services/slices/userDataSlice';
 
 type ProtectedRouteProps = {
   children: React.ReactElement;
@@ -15,12 +15,9 @@ export const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const location = useLocation();
 
-  const { isAuthChecked, isAuthenticated } = useSelector(
-    (store: RootState) => store.userData
-  );
+  const { isAuthChecked, isAuthenticated } = useSelector(getUserState);
 
   if (isAuthChecked) {
-    console.log('preloader');
     return <Preloader />;
   }
 

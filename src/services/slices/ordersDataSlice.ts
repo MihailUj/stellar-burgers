@@ -8,9 +8,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { RootState } from '../store';
 
-export const getFeedsThunk = createAsyncThunk('/orders/all', () =>
-  getFeedsApi()
-);
+export const getFeedsThunk = createAsyncThunk('/orders/all', getFeedsApi);
 
 export const getOrderByNumberThunk = createAsyncThunk(
   '/orders/:number',
