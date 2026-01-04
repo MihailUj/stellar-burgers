@@ -3,7 +3,8 @@ import constructorSlice, {
   ingredientMoveDown,
   ingredientMoveUp,
   removeIngredientFromConstructorById,
-  initialState
+  initialState,
+  resetModal
 } from './constructorSlice';
 import { expect, test, describe } from '@jest/globals';
 
@@ -381,6 +382,40 @@ describe('Тесты для constructorSlice', () => {
         initialState,
         removeIngredientFromConstructorById('1')
       );
+
+      const received = newState.constructorItems.ingredients;
+      const expected = expectedResult.constructorItems.ingredients;
+
+      expect(expected).toEqual(received);
+    });
+  });
+
+  describe('Тест экшена resetModal', () => {
+    const initialState = {
+      constructorItems: {
+        bun: null,
+        ingredients: []
+      },
+      orderRequest: false,
+      orderModalData: {
+        _id: '1',
+        status: 'done',
+        name: 'Test order',
+        createdAt: '2025-12-30T00:00:00Z',
+        updatedAt: '2025-12-30T00:00:00Z',
+        number: 1,
+        ingredients: ['ingredient1', 'ingredient2']
+      },
+      isLoading: false,
+      error: null
+    };
+    const expectedResult = {
+      ...initialState,
+      orderModalData: null
+    };
+
+    test('Сброс данных модального окна заказа', () => {
+      const newState = constructorSlice(initialState, resetModal());
 
       const received = newState.constructorItems.ingredients;
       const expected = expectedResult.constructorItems.ingredients;
