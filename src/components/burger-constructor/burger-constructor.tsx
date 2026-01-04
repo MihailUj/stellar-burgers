@@ -7,8 +7,8 @@ import {
   getOrderRequest,
   orderBurger,
   resetModal
-} from '../../services/slices/constructorSlice';
-import { getUserState } from '../../services/slices/userDataSlice';
+} from '../../services/slices/constructorSlice/constructorSlice';
+import { getUserState } from '../../services/slices/userDataSlice/userDataSlice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
 

@@ -6,11 +6,11 @@ import {
 } from '@api';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { RootState } from '../store';
+import { RootState } from '../../store';
 
 export const getFeedsThunk = createAsyncThunk('/orders/all', getFeedsApi);
 
-export const getOrderByNumberThunk = createAsyncThunk(
+export const getOrderByNumber = createAsyncThunk(
   '/orders/:number',
   async (number: number) => getOrderByNumberApi(number)
 );
@@ -24,7 +24,7 @@ export interface OrdersState {
   orderData: TOrder | null;
 }
 
-const initialState: OrdersState = {
+export const initialState: OrdersState = {
   isLoading: false,
   orders: [],
   total: 0,
@@ -40,26 +40,33 @@ export const ordersSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getFeedsThunk.pending, (state) => {
       state.isLoading = true;
+      state.error = null;
     });
-    builder.addCase(getFeedsThunk.rejected, (state) => {
+    builder.addCase(getFeedsThunk.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = action.error.message as string;
     });
     builder.addCase(getFeedsThunk.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      state.error = null;
       state.orders = payload.orders;
       state.total = payload.total;
       state.totalToday = payload.totalToday;
     });
 
-    builder.addCase(getOrderByNumberThunk.pending, (state) => {
+    builder.addCase(getOrderByNumber.pending, (state) => {
       state.isLoading = true;
+      state.orderData = null;
+      state.error = null;
     });
-    builder.addCase(getOrderByNumberThunk.rejected, (state) => {
+    builder.addCase(getOrderByNumber.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = action.error.message as string;
     });
-    builder.addCase(getOrderByNumberThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(getOrderByNumber.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.orderData = payload.orders[0];
+      state.error = null;
     });
   }
 });
