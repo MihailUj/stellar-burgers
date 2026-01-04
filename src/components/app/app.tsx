@@ -22,8 +22,8 @@ import {
 } from 'react-router-dom';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { useEffect } from 'react';
-import { getIngredientsThunk } from '../../services/slices/ingredientsSlice';
-import { getUser } from '../../services/slices/userDataSlice';
+import { getIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice';
+import { getUser } from '../../services/slices/userDataSlice/userDataSlice';
 import { useDispatch } from '../../services/store';
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
   const background = location.state?.background;
 
   useEffect(() => {
-    dispatch(getIngredientsThunk());
+    dispatch(getIngredients());
     dispatch(getUser());
   }, [dispatch]);
 

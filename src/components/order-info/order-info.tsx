@@ -4,11 +4,11 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import {
-  getOrderByNumberThunk,
+  getOrderByNumber,
   getOrdersState
-} from '../../services/slices/ordersDataSlice';
+} from '../../services/slices/ordersDataSlice/ordersDataSlice';
 import { useDispatch, useSelector } from '../../services/store';
-import { getIngredientsState } from '../../services/slices/ingredientsSlice';
+import { getIngredientsState } from '../../services/slices/ingredientsSlice/ingredientsSlice';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
@@ -18,7 +18,7 @@ export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrderByNumberThunk(number));
+    dispatch(getOrderByNumber(number));
   }, []);
 
   /* Готовим данные для отображения */

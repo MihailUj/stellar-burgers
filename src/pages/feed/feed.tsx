@@ -4,9 +4,9 @@ import { FC, useEffect } from 'react';
 import {
   getFeedsThunk,
   getOrdersState
-} from '../../services/slices/ordersDataSlice';
+} from '../../services/slices/ordersDataSlice/ordersDataSlice';
 import { useDispatch, useSelector } from '../../services/store';
-import { getIngredientsState } from '../../services/slices/ingredientsSlice';
+import { getIngredientsState } from '../../services/slices/ingredientsSlice/ingredientsSlice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */

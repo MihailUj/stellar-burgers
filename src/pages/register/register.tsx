@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   getUserState,
   registerUser
-} from '../../services/slices/userDataSlice';
+} from '../../services/slices/userDataSlice/userDataSlice';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
